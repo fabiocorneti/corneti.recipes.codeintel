@@ -22,7 +22,7 @@ To use it, add a codeintel configuration section to your ``buildout.cfg`` file a
         ${django:location}
         ${django:extra-paths}
 
-.. _SublimeCodeIntel: http://cheeseshop.python.org/pypi/corneti.recipes.codeintel
+.. _SublimeCodeIntel: https://github.com/Kronuz/SublimeCodeIntel
 
 .. _SublimeText: http://www.sublimetext.com/2
 
