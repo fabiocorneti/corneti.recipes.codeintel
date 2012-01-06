@@ -29,7 +29,7 @@ class CodeintelRecipe(object):
         ]
     }
 }
-""" % (self._python, '"\n            "'.join(paths)))
+""" % (self._python, '",\n            "'.join(paths)))
         return ""
 
     def update(self):
