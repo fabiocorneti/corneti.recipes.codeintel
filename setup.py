@@ -1,14 +1,23 @@
 from setuptools import setup, find_packages
 import sys, os
 
-version = '0.1.1'
+version = '0.1.2'
 
 setup(name='corneti.recipes.codeintel',
       version=version,
       description="A buildout recipe that generates a configuration file for SublimeCodeIntel",
-      long_description="""\
-""",
-      classifiers=[], # Get strings from http://pypi.python.org/pypi?%3Aaction=list_classifiers
+      long_description="""A buildout recipe that generates a configuration file for SublimeCodeIntel""",
+      classifiers=[
+            'Development Status :: 4 - Beta',
+            'Environment :: Console',
+            'Framework :: Buildout',
+            'Framework :: Buildout :: Recipe',
+            'Intended Audience :: Developers',
+            'License :: OSI Approved :: MIT License',
+            'Operating System :: OS Independent',
+            'Programming Language :: Python',
+            'Topic :: Text Editors'
+      ],
       keywords='sublimetext sublimecodeintel editor buildout recipe',
       author='Fabio Corneti',
       author_email='info@corneti.com',
