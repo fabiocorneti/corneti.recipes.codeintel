@@ -10,15 +10,52 @@ To use it, add a codeintel configuration section to your ``buildout.cfg`` file a
     parts =
         django
         codeintel
-    
+
     ...
 
     [codeintel]
     recipe = corneti.recipes.codeintel
     eggs = ${django:eggs}
-    extra-paths = 
+    extra-paths =
         ${django:location}
         ${django:extra-paths}
+
+Setting .codeintel folder
+===========================
+
+SublimeCodeIntel will pick up auto-completion information from ``.codeintel``
+folder from your Sublime Text project root.
+
+By default, this recipe generates the folder in the buildout root.
+You can specify optional ``codeintel-path`` if you want to generate
+``.codeintel`` in some other location.
+
+Example how to create CodeIntel information inside ``src/`` folder.
+Usually ``src/`` is used for all Python eggs you are currently developing yourself i.e.
+essentially all of your project codebase::
+
+    [codeintel]
+    recipe = corneti.recipes.codeintel
+    eggs = ${instance:eggs}
+    target = ${buildout:directory}/src/.codeintel
+
+This will generate file ``src/.codeintel/config`` which will list all your eggs
+used by ``[instance]`` in your *buildout.cfg*.
+
+Now you can open your ``src/`` folder as project in Sublime with perfect auto-completion support::
+
+    subl src
+
+... or just open src/ folder using *File > Open folder*.
+
+(`See how to configure Sublime Text 2 commaline commands <http://opensourcehacker.com/2012/05/11/sublime-text-2-tips-for-python-and-web-developers/>`_)
+
+Tips
+=======
+
+Reset auto-completion by choosing *SublimeCodeIntel: Reset* in command browser (CMD + SHIFT + P) [OSX].
+
+Force auto-completion dialog: CMD + P [OSX].
 
 Credits
 =======

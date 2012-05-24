@@ -1,12 +1,13 @@
 from setuptools import setup, find_packages
-import sys, os
 
-version = '0.1.3'
+version = '0.2'
+
+README = open("README.rst", "rt").read()
 
 setup(name='corneti.recipes.codeintel',
       version=version,
-      description="A buildout recipe that generates a configuration file for SublimeCodeIntel",
-      long_description="""A buildout recipe that generates a configuration file for SublimeCodeIntel""",
+      description="A Sublime Text 2 / SublimeCodeIntel auto-completion data generator for buildout",
+      long_description=README,
       classifiers=[
             'Development Status :: 4 - Beta',
             'Environment :: Console',
@@ -27,6 +28,6 @@ setup(name='corneti.recipes.codeintel',
       namespace_packages=['corneti', 'corneti.recipes'],
       include_package_data=True,
       zip_safe=False,
-      install_requires = ['setuptools', 'zc.buildout', 'zc.recipe.egg',], 
-      entry_points = { 'zc.buildout' : ['default = corneti.recipes.codeintel:CodeintelRecipe'] },
+      install_requires=['setuptools', 'zc.buildout', 'zc.recipe.egg'],
+      entry_points={'zc.buildout': ['default = corneti.recipes.codeintel:CodeintelRecipe']},
       )

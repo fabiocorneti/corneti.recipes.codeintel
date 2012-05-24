@@ -5,11 +5,17 @@ import zc.recipe.egg
 class CodeintelRecipe(object):
 
     def __init__(self, buildout, name, options):
+
         self.buildout, self.name, self.options = buildout, name, options
 
-        self._codeintel_directory = os.path.join(self.buildout['buildout']['directory'], '.codeintel')
-        if not os.path.exists(self._codeintel_directory):
-            os.mkdir(self._codeintel_directory)
+        # Read .codeintel directory from options or just dump in the buildout root
+        default_target = os.path.join(self.buildout['buildout']['directory'], '.codeintel')
+        target = options.get("codeintel-path", default_target)
+
+        self.codeintel_directory = target
+
+        if not os.path.exists(self.codeintel_directory):
+            os.mkdir(self.codeintel_directory)
 
         self._python = self.buildout['buildout']['executable']
 
@@ -20,7 +26,7 @@ class CodeintelRecipe(object):
     def install(self):
         paths = self.egg.working_set()[1].entries + self.extra_paths
         paths = filter(lambda p: p.strip() != '', paths)
-        open(os.path.join(".codeintel", "config"), "w").write("""\
+        open(os.path.join(self.codeintel_directory, "config"), "w").write("""\
 {
     "Python": {
         "python": "%s",
