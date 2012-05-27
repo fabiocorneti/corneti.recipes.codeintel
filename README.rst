@@ -62,8 +62,11 @@ Credits
 
 Based on the ``mkcodeintel`` script available in optilude's SublimeTextMisc_ repository.
 
+``codeintel-path`` option and much better documentation by Mikko Ohtamaa .
+
 .. _SublimeCodeIntel: https://github.com/Kronuz/SublimeCodeIntel
 
 .. _SublimeText: http://www.sublimetext.com/2
 
 .. _SublimeTextMisc: https://github.com/optilude/SublimeTextMisc
+
