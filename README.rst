@@ -37,7 +37,7 @@ essentially all of your project codebase::
     [codeintel]
     recipe = corneti.recipes.codeintel
     eggs = ${instance:eggs}
-    target = ${buildout:directory}/src/.codeintel
+    codeintel-path = ${buildout:directory}/src/.codeintel
 
 This will generate file ``src/.codeintel/config`` which will list all your eggs
 used by ``[instance]`` in your *buildout.cfg*.
