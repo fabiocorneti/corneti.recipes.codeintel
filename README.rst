@@ -105,6 +105,34 @@ We check that every lang is present in config
     >>> contents_json.keys() == CodeintelRecipe.SUPPORTED_LANGUAGES
     True
 
+Let's check the usage with only one additional language
+
+    >>> write('buildout.cfg',
+    ... r"""
+    ... [buildout]
+    ... parts = codeintel
+    ... newest = false
+    ...
+    ... [codeintel]
+    ... recipe = corneti.recipes.codeintel
+    ... eggs = zc.buildout
+    ... javascript-extra-paths = /some
+    ... """)
+
+    >>> print system(buildout)
+    Uninstalling codeintel.
+    Installing codeintel.
+
+    >>> contents = open(os.path.join('.codeintel', 'config')).read()
+    >>> contents_json = simplejson.loads(contents)
+
+    >>> len(contents_json) == 2
+    True
+
+    >>> contents_json['JavaScript']
+    {'javascriptExtraPaths': ['/some']}
+
+
 Tips
 =======
 

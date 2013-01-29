@@ -28,11 +28,11 @@ class CodeintelRecipe(object):
         for lang in self.SUPPORTED_LANGUAGES:
             lang_lower = lang.lower()
             lang_extra_paths = filter(None, map(lambda x: x.strip(),
-                options.get('{0}-extra-paths'.format(lang.lower()), '').split()))
+                options.get('{0}-extra-paths'.format(lang_lower), '').split()))
             if lang_extra_paths:
                 config.setdefault(lang, {})
                 config[lang]['{0}ExtraPaths'.format(lang_lower)] = lang_extra_paths
-            lang_path = options.get('{0}-path'.format(lang.lower()), '')
+            lang_path = options.get('{0}-path'.format(lang_lower), '')
             if lang_path:
                 config[lang][lang_lower] = lang_path
 
