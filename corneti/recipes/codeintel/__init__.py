@@ -1,8 +1,12 @@
 import os
+import simplejson as json
 import zc.recipe.egg
 
 
 class CodeintelRecipe(object):
+
+    SUPPORTED_LANGUAGES = ['PHP', 'Python', 'RHTML', 'JavaScript', 'Smarty', 'Mason', 'Node.js', 'XBL', 'Tcl', 'HTML',
+        'HTML5', 'TemplateToolkit', 'XUL', 'Django', 'Perl', 'Ruby', 'Python3']
 
     def __init__(self, buildout, name, options):
 
@@ -19,23 +23,33 @@ class CodeintelRecipe(object):
 
         self._python = self.buildout['buildout']['executable']
 
-        self.extra_paths = options.get('extra-paths', '').split('\n')
-        self.extra_paths = filter(lambda p: p.strip() != '', self.extra_paths)
+        # form extra paths dictionary where each key is lang and value is a list of paths
+        config = {}
+        for lang in self.SUPPORTED_LANGUAGES:
+            lang_lower = lang.lower()
+            config.setdefault(lang, {})
+            config[lang]['{0}ExtraPaths'.format(lang_lower)] = filter(None, map(lambda x: x.strip(),
+                options.get('{0}-extra-paths'.format(lang.lower()), '').split()))
+            lang_path = options.get('{0}-path'.format(lang.lower()), '')
+            if lang_path:
+                config[lang][lang_lower] = lang_path
+
+        # update formed dict with extra-paths option
+        python_extra_paths = options.get('extra-paths', '').split('\n')
+        python_extra_paths = filter(lambda p: p.strip() != '', python_extra_paths)
+
+        config['Python']['pythonExtraPaths'].extend(python_extra_paths)
+
+        self.config = config
+
         self.egg = zc.recipe.egg.Egg(self.buildout, self.name, self.options)
 
     def install(self):
-        paths = self.egg.working_set()[1].entries + self.extra_paths
-        paths = filter(lambda p: p.strip() != '', paths)
-        open(os.path.join(self.codeintel_directory, "config"), "w").write("""\
-{
-    "Python": {
-        "python": "%s",
-        "pythonExtraPaths": [
-            "%s"
-        ]
-    }
-}
-""" % (self._python, '",\n            "'.join(paths)))
+        python_paths = (filter(None, map(lambda p: p.strip(), self.egg.working_set()[1].entries)) +
+            self.config['Python']['pythonExtraPaths'])
+        self.config['Python']['pythonExtraPaths'] = python_paths
+        open(os.path.join(self.codeintel_directory, "config"), "w").write(json.dumps(self.config, indent=4,
+            sort_keys=True))
         return ""
 
     def update(self):

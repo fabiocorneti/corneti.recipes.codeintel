@@ -4,6 +4,10 @@ version = '0.2.1'
 
 README = open("README.rst", "rt").read()
 
+
+tests_require = ['zope.testing', 'zc.buildout']
+
+
 setup(name='corneti.recipes.codeintel',
       version=version,
       description="A Sublime Text 2 / SublimeCodeIntel auto-completion data generator for buildout",
@@ -28,6 +32,9 @@ setup(name='corneti.recipes.codeintel',
       namespace_packages=['corneti', 'corneti.recipes'],
       include_package_data=True,
       zip_safe=False,
-      install_requires=['setuptools', 'zc.buildout', 'zc.recipe.egg'],
+      tests_require=tests_require,
+      extras_require=dict(tests=tests_require),
+      test_suite='collective.recipe.pip.tests.test_docs.test_suite',
+      install_requires=['setuptools', 'zc.buildout', 'zc.recipe.egg', 'simplejson'],
       entry_points={'zc.buildout': ['default = corneti.recipes.codeintel:CodeintelRecipe']},
       )
