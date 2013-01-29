@@ -40,7 +40,7 @@ class CodeintelRecipe(object):
         python_extra_paths = options.get('extra-paths', '').split('\n')
         python_extra_paths = filter(lambda p: p.strip() != '', python_extra_paths)
 
-        config['Python']['pythonExtraPaths'].extend(python_extra_paths)
+        config.setdefault('Python', {}).setdefault('pythonExtraPaths', []).extend(python_extra_paths)
 
         self.config = config
 
