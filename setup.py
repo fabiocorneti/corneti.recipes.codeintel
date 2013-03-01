@@ -1,6 +1,6 @@
 from setuptools import setup, find_packages
 
-version = '0.2.2bubenkoff'
+version = '0.2.2dev'
 
 README = open("README.rst", "rt").read()
 
