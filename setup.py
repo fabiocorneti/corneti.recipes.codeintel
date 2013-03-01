@@ -1,10 +1,12 @@
 import os
 from setuptools import setup, find_packages
 
-version = '0.2.2dev-1'
+version = '0.2.2dev-2'
 
-README = open(os.path.join(os.path.dirname(__file__), "README.rst"), "rt").read()
-
+try:
+    README = open(os.path.join(os.path.dirname(__file__), "README.rst"), "rt").read()
+except IOError:
+    README = ''
 
 tests_require = ['zope.testing', 'zc.buildout']
 
