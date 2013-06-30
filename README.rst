@@ -140,6 +140,21 @@ Reset auto-completion by choosing *SublimeCodeIntel: Reset* in command browser (
 
 Force auto-completion dialog: CMD + P [OSX].
 
+Testing
+=======
+
+To test this recipe, bootstrap the included buildout, build it and execute the test section:
+
+    $ python bootstrap.py
+    $ bin/buildout -v
+    $ bin/buildout test
+
+If the first command gives you a setuptools dependency error, try the following variant to use distribute:
+
+    $ python bootstrap.py -d
+    $ bin/buildout -v
+    $ bin/buildout test
+
 Credits
 =======
 
