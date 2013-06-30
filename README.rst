@@ -78,7 +78,8 @@ Running the buildout gives us::
     >>> print system(buildout)
     Installing codeintel.
 
-We see the folder with codeintel config is created
+We see the folder with codeintel config is created::
+
     >>> print ls('.')
     d  .codeintel
     ...
@@ -87,7 +88,7 @@ We see the folder with codeintel config is created
     -  config
     ...
 
-We check the contents of the config
+We check the contents of the config::
 
     >>> import os
     >>> import simplejson
@@ -101,11 +102,12 @@ We check the contents of the config
     >>> len(contents_json['Python']['pythonExtraPaths'])
     4
 
-We check that every lang is present in config
+We check that every lang is present in config::
+
     >>> contents_json.keys() == CodeintelRecipe.SUPPORTED_LANGUAGES
     True
 
-Let's check the usage with only one additional language
+Let's check the usage with only one additional language::
 
     >>> write('buildout.cfg',
     ... r"""
@@ -143,13 +145,13 @@ Force auto-completion dialog: CMD + P [OSX].
 Testing
 =======
 
-To test this recipe, bootstrap the included buildout, build it and execute the test section:
+To test this recipe, bootstrap the included buildout, build it and execute the test section::
 
     $ python bootstrap.py
     $ bin/buildout -v
     $ bin/buildout test
 
-If the first command gives you a setuptools dependency error, try the following variant to use distribute:
+If the first command gives you a setuptools dependency error, try the following variant to use distribute::
 
     $ python bootstrap.py -d
     $ bin/buildout -v
