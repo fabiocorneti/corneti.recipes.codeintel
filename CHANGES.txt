@@ -2,8 +2,8 @@
 Changelog
 =========
 
-Unreleased
-==========
+0.3
+===
 
 - Added support for executable path and extra paths for all languages which Codeintel supports
 - Added travis config
@@ -11,4 +11,4 @@ Unreleased
 0.1
 ===
 
-* First public release.
+- First public release.
