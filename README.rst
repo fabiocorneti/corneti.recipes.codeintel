@@ -164,6 +164,8 @@ Based on the ``mkcodeintel`` script available in optilude's SublimeTextMisc_ rep
 
 ``codeintel-path`` option and much better documentation by Mikko Ohtamaa .
 
+Support for executable path and extra paths for all languages which Codeintel supports by Anatoly Bubenkov .
+
 .. _SublimeCodeIntel: https://github.com/Kronuz/SublimeCodeIntel
 
 .. _SublimeText: http://www.sublimetext.com/2
