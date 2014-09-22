@@ -29,6 +29,7 @@ class CodeintelRecipe(object):
             lang_lower = lang.lower()
             lang_extra_paths = filter(None, map(lambda x: x.strip(),
                 options.get('{0}-extra-paths'.format(lang_lower), '').split()))
+            lang_extra_paths = list(lang_extra_paths)
             if lang_extra_paths:
                 config.setdefault(lang, {})
                 config[lang]['{0}ExtraPaths'.format(lang_lower)] = lang_extra_paths
@@ -47,8 +48,10 @@ class CodeintelRecipe(object):
         self.egg = zc.recipe.egg.Egg(self.buildout, self.name, self.options)
 
     def install(self):
-        python_paths = (filter(None, map(lambda p: p.strip(), self.egg.working_set()[1].entries)) +
-            self.config['Python']['pythonExtraPaths'])
+        python_paths = (
+            list(filter(None, map(lambda p: p.strip(), self.egg.working_set()[1].entries))) +
+            self.config['Python']['pythonExtraPaths']
+        )
         self.config['Python']['pythonExtraPaths'] = python_paths
         open(os.path.join(self.codeintel_directory, "config"), "w").write(json.dumps(self.config, indent=4,
             sort_keys=True))
